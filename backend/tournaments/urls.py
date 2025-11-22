@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import TournamentViewSet
 
 router = DefaultRouter()
-router.register(r'tournaments', TournamentViewSet, basename='tournament')
+router.register(r'', TournamentViewSet, basename='tournament')  # This gives /api/tournaments/ endpoints
 
 urlpatterns = [
     path('', include(router.urls)),

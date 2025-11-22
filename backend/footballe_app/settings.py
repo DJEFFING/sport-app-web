@@ -34,8 +34,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',                    # Required for CORS
-    'tournaments.apps.TournamentsConfig',  # Ensure tournaments app is included
+    'corsheaders',
+    'rest_framework', 
+    'tournaments.apps.TournamentsConfig',
+    'teams.apps.TeamsConfig',   # <-- ADD THIS
 ]
 
 MIDDLEWARE = [
