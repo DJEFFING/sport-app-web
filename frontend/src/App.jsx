@@ -15,6 +15,7 @@ import { Team } from './pages/team/team';
 import { Game } from './pages/games/games';
 import { AdhesionValidation } from './pages/adhesion/adhesionValidation/adhesionValidation';
 import OrganizerDashboard from './pages/organizer/organizerDashboard/organizerDashboard';
+import { AvalibleTeam } from './pages/team/avilble-team/avalibleTeam';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -27,6 +28,7 @@ function App() {
      <Route path='/organisateur' element={<Organisateur/>}/>
      <Route path='/tournaments' element={<Tournament/>}/>
      <Route path='/teams' element={<Team/>}/>
+     <Route path='/avalibleTeams' element={<AvalibleTeam/>}/>
      <Route path='/games' element={<Game/>}/>
      <Route path='/adhesionValidation' element={<AdhesionValidation/>}/>
      <Route path='/organizerDashboard' element={<OrganizerDashboard/>}/>

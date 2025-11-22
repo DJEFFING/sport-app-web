@@ -2,14 +2,14 @@ import * as React from "react";
 import { Drawer, Button, Box, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export const LeftDrawerOrganizer = () => {
+export const LeftDrawerPlayer = () => {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
 
   const menuItems = [
     { text: "Tableau de bord", path: "/playerDashboard" },
     { text: "Tournois", path: "/tournaments" },
-    { text: "Equipes", path: "/teams" },
+    { text: "Equipes", path: "/avalibleTeams" },
     { text: "Adhesion", path: "/adhesionCreate" },
     { text: "Profil", path: "/playProfil" },
   ];
@@ -30,6 +30,7 @@ export const LeftDrawerOrganizer = () => {
       </Button>
 
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
+        <h2 className="m-3">Menue Equipe</h2>
         <Box sx={{ width: 250 }} role="presentation">
           <List>
             {menuItems.map((item) => (
