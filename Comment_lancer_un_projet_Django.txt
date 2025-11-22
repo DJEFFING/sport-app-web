@@ -1,0 +1,28 @@
+Comment lancer un projet Django
+
+Description :
+Voici les étapes pour démarrer un nouveau projet Django et créer une application.
+
+Étapes :
+
+1. Créer le projet Django :
+   django-admin startproject nom_du_projet .
+
+2. Créer une nouvelle application Django :
+   python manage.py startapp nom_de_l_application
+
+3. Ajouter l’application à INSTALLED_APPS dans le fichier settings.py :
+   - Ouvrir footballe_app/settings.py
+   - Ajouter 'nom_de_l_application' à la liste INSTALLED_APPS
+
+4. Lancer le serveur de développement :
+   python manage.py runserver
+
+5. Vérifier dans le navigateur à l’adresse :
+   http://127.0.0.1:8000/
+
+Astuce :
+Pour chaque nouvelle fonctionnalité, créez une nouvelle application.
+Exemples : tournois, matchs, utilisateurs
+
+À inclure dans le projet
