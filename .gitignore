@@ -1,0 +1,5 @@
+/backend/venv
+/backend/venv
+*.pyc
+/backend/venv
+/backend/venv/Scripts
