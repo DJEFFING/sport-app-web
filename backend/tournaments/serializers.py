@@ -14,7 +14,8 @@ class TournamentSerializer(serializers.ModelSerializer):
             'name', 
             'location', 
             'start_date', 
-            'end_date',  
+            'end_date', 
+            'organizer', 
             'organizer_username'
         ]
         # Champs de lecture seule. Django remplira l'organizer à la création.
