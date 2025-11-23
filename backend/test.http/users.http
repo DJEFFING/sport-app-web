@@ -1,0 +1,38 @@
+GET http://127.0.0.1:8000/api/users/
+Content-type : application/json
+
+### user 1
+POST http://127.0.0.1:8000/api/users/
+Content-type : application/json
+
+{
+    "id":"aaf3dcaa-39ce-40d0-9caf-11b6a10ce51f",
+    "clerk_id":2345,
+    "email":"drake.dev@gmail.com",
+    "full_name":"drake245",
+    "role":"organizer"
+}
+
+### user 2
+POST http://127.0.0.1:8000/api/users/
+Content-type : application/json
+
+{
+    "id":"c5c1d8e1-67b5-4d94-b75f-b5ad6193ed81",
+    "clerk_id":2346,
+    "email":"victor.dev@gmail.com",
+    "full_name":"victor245",
+    "role":"organizer"
+}
+
+### user 3
+POST http://127.0.0.1:8000/api/users/
+Content-type : application/json
+
+{
+    "id":"d0a16b4b-ec3e-4300-925c-81a186c68b73",
+    "clerk_id":2347,
+    "email":"francois.dev@gmail.com",
+    "full_name":"francois245",
+    "role":"player"
+}
