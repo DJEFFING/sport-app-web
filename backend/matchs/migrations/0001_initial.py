@@ -31,7 +31,10 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Matchs',
                 'db_table': 'matches',
                 'ordering': ['date'],
-                'constraints': [models.CheckConstraint(condition=models.Q(('team_a', models.F('team_b')), _negated=True), name='teams_must_be_different')],
             },
+        ),
+        migrations.AddConstraint(
+            model_name='match',
+            constraint=models.CheckConstraint(check=models.Q(('team_a', models.F('team_b')), _negated=True), name='teams_must_be_different'),
         ),
     ]
