@@ -11,9 +11,15 @@ class TournamentSerializer(serializers.ModelSerializer):
         model = Tournament
         fields = [
             'id', 
-            'name', 
-            'location', 
+            'name',
+            'sport',
+            'city',
             'start_date', 
-
+            'end_date', 
+            'organizer',
+            'organizer_username',
+            'created_at'
+        ]
+        
         # Champs de lecture seule. Django remplira l'organizer à la création.
         # read_only_fields = ('organizer',)
