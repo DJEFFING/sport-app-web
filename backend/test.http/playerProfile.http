@@ -1,0 +1,25 @@
+@baseUrl = http://127.0.0.1:8000/api
+
+### ===========================================
+### 1. OBTENIR MON PROFIL JOUEUR
+### GET /api/player/profile/
+### (le backend crée le profil si absent)
+### ===========================================
+GET {{baseUrl}}/player/profile/
+Accept: application/json
+
+
+### ===========================================
+### 2. METTRE À JOUR MON PROFIL JOUEUR
+### PATCH /api/player/profile/
+### ===========================================
+PATCH {{baseUrl}}/player/profile/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "city": "Montreal",
+  "favorite_sport": "football",
+  "level": "intermediate",
+  "position": "Attaquant"
+}
