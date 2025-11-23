@@ -1,7 +1,15 @@
 @baseUrl = http://127.0.0.1:8000/api
-@teamAId = 6369e960-d1c3-46c3-b920-2e89fb9b77dc
-@teamBId = 6b7d59b6-c199-49a2-9bdc-2c6b4705d0fb
+@teamAId = a3757c56-d9f8-4804-a287-d0bf7843fb07
+@teamBId = cb9376dc-c762-427c-b043-ff2a271dc41c
 @matchId = UUID_MATCH_ICI
+
+
+### ===========================================
+### Obtenir la liste des matchs
+### Organizer du tournoi des 2 équipes requis
+### ===========================================
+GET {{baseUrl}}/matches/
+Accept: application/json
 
 ### ===========================================
 ### 1. CRÉER UN MATCH (POST /api/matches/)
