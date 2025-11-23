@@ -1,0 +1,76 @@
+@baseUrl = http://127.0.0.1:8000/api
+@tournamentId = 13
+@teamId = 6369e960-d1c3-46c3-b920-2e89fb9b77dc
+
+### ===========================================
+### 1. LISTE DES ÉQUIPES (si list activé)
+### ===========================================
+GET {{baseUrl}}/teams/
+Accept: application/json
+
+
+### ===========================================
+### 2. CRÉATION D’UNE ÉQUIPE (POST /api/teams/)
+### Organizer connecté requis (normalement)
+### ===========================================
+POST {{baseUrl}}/teams/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "FC Montréal Legends",
+  "tournament": "{{tournamentId}}",
+  "max_capacity": 15
+
+}
+
+
+### ===========================================
+### 3. DÉTAIL D’UNE ÉQUIPE (GET /api/teams/{id}/)
+### ===========================================
+GET {{baseUrl}}/teams/{{teamId}}/
+Accept: application/json
+
+
+### ===========================================
+### 4. LISTE DES ÉQUIPES DISPONIBLES (GET /api/teams/available/)
+### Sans filtre
+### ===========================================
+GET {{baseUrl}}/teams/available/
+Accept: application/json
+
+
+### ===========================================
+### 5. ÉQUIPES DISPONIBLES FILTRÉES PAR VILLE
+### ?city=Montreal
+### ===========================================
+GET {{baseUrl}}/teams/available/?city=Montreal
+Accept: application/json
+
+
+### ===========================================
+### 6. ÉQUIPES DISPONIBLES FILTRÉES PAR SPORT
+### ?sport=football
+### (ton viewset utilise tournament__sport)
+### ===========================================
+GET {{baseUrl}}/teams/available/?sport=football
+Accept: application/json
+
+
+### ===========================================
+### 7. ÉQUIPES DISPONIBLES PAR VILLE + SPORT
+### ?city=Montreal&sport=football
+### ===========================================
+GET {{baseUrl}}/teams/available/?city=Montreal&sport=football
+Accept: application/json
+
+###
+
+PATCH {{baseUrl}}/teams/e1ec8478-5441-4862-af5e-35d0f45c928a/
+Accept: application/json
+
+{
+  "is_full": true
+
+}
+ 
