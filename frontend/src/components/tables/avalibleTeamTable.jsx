@@ -58,7 +58,7 @@ export default function AvalibleTeamTable() {
       // Le corps de la requête est un objet contenant les variables
       const requestBody = {
           user_id: defaultUserId, 
-          team_id: teamId, 
+          team: teamId, 
           message: defaultMessage 
       };
 

@@ -23,7 +23,7 @@ Content-Type: application/json
 {
   "user_id":"{{userId}}",
   "team": "{{teamId}}",
-  "message": "Je veux rejoindre l'équipe 🙂"
+  "message": "Je veux rejoindre l'équipe "
 }
 
 

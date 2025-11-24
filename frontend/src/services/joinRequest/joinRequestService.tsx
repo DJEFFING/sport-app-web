@@ -8,7 +8,6 @@ export class JoinRequestService{
         console.log(joinRequest)
         try {
             const response = await axios.post(this.url, joinRequest);
-           
             return response.data;
         } catch (error) {
             console.error("Erreur lors de la création d'une demande", error);
