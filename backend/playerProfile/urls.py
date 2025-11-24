@@ -1,9 +1,7 @@
-# playerProfile/urls.py
+from rest_framework import routers
+from playerProfile.views import PlayerProfileViewSet
 
-from django.urls import path
-from .views import PlayerProfileView
+router = routers.DefaultRouter()
+router.register(r'playerprofiles', PlayerProfileViewSet)
 
-urlpatterns = [
-    # /api/player/profile/
-    path("player/profile/", PlayerProfileView.as_view(), name="player-profile"),
-]
+urlpatterns = router.urls

@@ -1,10 +1,4 @@
-﻿# Installer Django et les packages nécessairespip install django==5.0
-# djangorestframework==3.14.0
-# psycopg2-binary  # Pour PostgreSQLpip install python-dotenv==1.0.0    # Pour les variables d'environnementpip install stripe==7.0.0           # SDK Stripepip install pyjwt==2.8.0            # Pour JWTpip install cryptography==41.0.7    # Dépendance pour JWT
-# django-cors-headers==4.3.1  # Pour CORS
-# requests==2.31.0        # Pour
-# dj_database_url==3.0.1
-
+﻿
 # Installer Django et les packages nécessairespip install django==5.0
 Django==5.0.1
 djangorestframework==3.14.0

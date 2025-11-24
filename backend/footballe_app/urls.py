@@ -9,4 +9,6 @@ urlpatterns = [
     path('api/', include('matchs.urls')), #match
     path("api/", include("playerProfile.urls")), #player
     path('api-auth/', include('rest_framework.urls')),
+    path("api/", include("joinRequest.urls")),
+
 ]

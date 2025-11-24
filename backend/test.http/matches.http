@@ -16,7 +16,7 @@ Accept: application/json
   "team_a": "{{teamAId}}",
   "team_b": "{{teamBId}}",
   "date": "2025-12-10T19:30:00Z",
-  "location": "Stade Saputo"
+  "location": "Fes"
 }
 
 

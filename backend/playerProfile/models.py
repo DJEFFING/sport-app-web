@@ -19,7 +19,7 @@ class PlayerProfile(models.Model):
     
     # Lien One-to-One : assure que chaque profil est lié à un seul utilisateur.
     user = models.OneToOneField(
-        User, # Utiliser la chaîne de caractères si User n'est pas importé ou est défini plus tard
+        "users.User", # Utiliser la chaîne de caractères si User n'est pas importé ou est défini plus tard
         on_delete=models.CASCADE,
         related_name='player_profile' # Nom du lien inverse (ex: user.player_profile)
     )

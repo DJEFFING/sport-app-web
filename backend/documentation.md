@@ -29,8 +29,9 @@ python manage.py createsuperuser
 
 #pour demarer le serveur 
 python manage.py runserver
-
-
+#
+pip install "python-jose[cryptography]" requests
+pip install PyJWT requests
 ```
 ## Structure backend Django
 
@@ -92,3 +93,12 @@ sports_platform/                # Dossier du projet backend
     ├── urls.py
     └── services.py (optionnel)
 ```
+### Comment remplir les IDs  JoinRequest?
+
+- `teamId` → tu le prends dans la réponse de `GET /api/teams/`
+
+- `playerId` → tu le prends soit dans `GET /api/users/`, soit dans le champ "`player`" de la join request créée.
+
+- `organizerId` → c’est l’id du user qui est organiser du tournoi de l’équipe (champ `organizer` du tournoi si tu le exposes, ou ce que vous avez utilisé en base).
+
+- `joinRequestId` → `id` dans la réponse du `POST /api/join-requests/`

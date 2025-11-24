@@ -5,20 +5,31 @@
 ### GET /api/player/profile/
 ### (le backend crée le profil si absent)
 ### ===========================================
-GET {{baseUrl}}/player/profile/
+GET {{baseUrl}}/playerprofiles/
 Accept: application/json
+###
+POST {{baseUrl}}/playerprofiles/
+Content-Type: application/json
 
-
+{
+    "user": "fb9ad348-d532-4849-90c3-a0135fb9ab5c",
+    "full_name": "Émile Bouchard",
+    "city": "Québec",
+    "favorite_sport": "Hockey",
+    "level": "beginner",
+    "position": "Ailier Gauche"
+}
+ 
 ### ===========================================
 ### 2. METTRE À JOUR MON PROFIL JOUEUR
 ### PATCH /api/player/profile/
 ### ===========================================
-PATCH {{baseUrl}}/player/profile/
+PATCH {{baseUrl}}/playerprofiles/
 Content-Type: application/json
 Accept: application/json
 
 {
-  "city": "Montreal",
+  "city": "Oran",
   "favorite_sport": "football",
   "level": "intermediate",
   "position": "Attaquant"
