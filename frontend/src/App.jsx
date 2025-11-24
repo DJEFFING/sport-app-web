@@ -17,6 +17,7 @@ import { AdhesionValidation } from './pages/adhesion/adhesionValidation/adhesion
 import OrganizerDashboard from './pages/organizer/organizerDashboard/organizerDashboard';
 import { AvalibleTeam } from './pages/team/avilble-team/avalibleTeam';
 import { getTournamentList } from './services/tournament/tounamentService';
+import PlayerProfile from './pages/playerProfile/playerProfile'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -35,6 +36,7 @@ function App() {
      <Route path='/adhesionValidation' element={<AdhesionValidation/>}/>
      <Route path='/organizerDashboard' element={<OrganizerDashboard/>}/>
      <Route path='/joueur' element={<Joueur/>}/>
+     <Route path='/playerProfile' element={<PlayerProfile/>}/>
      </Routes>
     </BrowserRouter>
   )
