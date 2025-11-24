@@ -1,0 +1,47 @@
+@baseUrl = http://127.0.0.1:8000/api
+# Colle ici un vrai token Clerk (depuis ton frontend ou la console Clerk)
+@token = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ij...VRAI_TOKEN_ICI...
+
+### 1) Test simple: profil joueur (PlayerProfile)
+GET {{baseUrl}}/player/profile/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+###
+
+### 2) Créer un tournoi (si protégé)
+# (Seulement si tu passes par Clerk aussi pour les organizers)
+POST {{baseUrl}}/tournaments/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Test Tournoi avec Clerk",
+  "location": "Stade Test",
+  "start_date": "2025-12-01",
+  "end_date": "2025-12-03"
+}
+
+###
+
+### 3) Créer un match (utilise les vrais UUID d'équipes)
+@teamAId = UUID_TEAM_A_ICI
+@teamBId = UUID_TEAM_B_ICI
+
+POST {{baseUrl}}/matches/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "team_a": "{{teamAId}}",
+  "team_b": "{{teamBId}}",
+  "date": "2025-12-10T18:00:00Z",
+  "location": "Terrain Central"
+}
+
+###
+
+### 4) Vérifier mes matchs
+GET {{baseUrl}}/matches/my/
+Authorization: Bearer {{token}}
+Content-Type: application/json

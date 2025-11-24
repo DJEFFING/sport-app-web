@@ -52,11 +52,14 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # "users.middleware.ClerkJWTMiddleware",
+    
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -129,7 +132,19 @@ REST_FRAMEWORK = {
     ],
 }
 
-# CORS configuration
+# REST_FRAMEWORK = {
+#     "DEFAULT_AUTHENTICATION_CLASSES": [
+#         "users.authentication.ClerkJWTAuthentication",
+#     ],
+#     "DEFAULT_PERMISSION_CLASSES": [
+#         "rest_framework.permissions.IsAuthenticated",
+#     ],
+# }
+
+# =============================================================================
+# CORS CONFIGURATION
+# =============================================================================
+# Autoriser le frontend React à faire des requêtes
 CORS_ALLOWED_ORIGINS = [
     os.getenv('FRONTEND_URL', 'http://localhost:3000'),
 ]
@@ -159,6 +174,13 @@ CORS_ALLOW_HEADERS = [
 CLERK_SECRET_KEY = os.getenv('CLERK_SECRET_KEY')
 CLERK_PUBLISHABLE_KEY = os.getenv('CLERK_PUBLISHABLE_KEY')
 CLERK_JWKS_URL = os.getenv('CLERK_JWKS_URL')
+# ==== CLERK AUTH CONFIG ====
+
+# CLERK_ISSUER = "https://warm-ocelot-14.clerk.accounts.dev"
+# CLERK_JWKS_URL = "https://warm-ocelot-14.clerk.accounts.dev/.well-known/jwks.json"
+
+# # Pour l'instant tu peux mettre None si tu n'utilises pas "audience"
+# CLERK_AUDIENCE = None   # ou "http://127.0.0.1:8000/api" si tu crées un modèle JWT avec cette audience
 
 # Stripe configuration
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')

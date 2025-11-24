@@ -11,7 +11,9 @@ class PlayerProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlayerProfile
         fields = [
+            "id",
             "user_id",
+            "user",
             "full_name",
             "city",
             "favorite_sport",

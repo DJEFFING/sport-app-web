@@ -28,42 +28,7 @@ class MatchViewSet(viewsets.ModelViewSet):
 
     queryset = Match.objects.select_related("team_a", "team_b", "team_a__tournament")
     serializer_class = MatchSerializer
-    # Pour la vraie app : authentification obligatoire
-    # permission_classes = [permissions.AllowAny]
-    #http_method_names = ["get", "post", "patch", "delete", "head", "options"]
-
-    # # --------- Création d’un match (organisateur du tournoi) ---------
-    # def create(self, request, *args, **kwargs):
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-
-    #     team_a = serializer.validated_data["team_a"]
-    #     team_b = serializer.validated_data["team_b"]
-
-    #     # 1) Les deux équipes doivent appartenir au même tournoi
-    #     if team_a.tournament_id != team_b.tournament_id:
-    #         return Response(
-    #             {"detail": "Les deux équipes doivent appartenir au même tournoi."},
-    #             status=status.HTTP_400_BAD_REQUEST,
-    #         )
-
-    #     # 2) L’utilisateur doit être organisateur du tournoi
-    #     if not request.user.is_authenticated:
-    #         return Response(
-    #             {"detail": "Authentification requise."},
-    #             status=status.HTTP_401_UNAUTHORIZED,
-    #         )
-
-    #     if team_a.tournament.organizer != request.user:
-    #         return Response(
-    #             {"detail": "Vous devez être l'organisateur du tournoi pour créer un match."},
-    #             status=status.HTTP_403_FORBIDDEN,
-    #         )
-
-    #     # Si tout est bon -> création
-    #     self.perform_create(serializer)
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+   
     # --------- Mise à jour partielle (scores, date, lieu) ---------
     def partial_update(self, request, *args, **kwargs):
         match = self.get_object()
@@ -81,17 +46,7 @@ class MatchViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_403_FORBIDDEN,
             )
 
-        # je peux décider de restreindre aux scores seulement :
-        # allowed_fields = {"score_a", "score_b"}
-        # extra = set(request.data.keys()) - allowed_fields
-        # if extra:
-        #     return Response(
-        #         {
-        #             "detail": "Seuls 'score_a' et 'score_b' peuvent être modifiés.",
-        #             "invalid_fields": list(extra),
-        #         },
-        #         status=status.HTTP_400_BAD_REQUEST,
-        #     )
+        
 
         return super().partial_update(request, *args, **kwargs)
 

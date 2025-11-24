@@ -5,6 +5,7 @@ from .serializers import TournamentSerializer
 # TournamentViewSet gère toutes les opérations CRUD (Create, Read, Update, Delete)
 class TournamentViewSet(viewsets.ModelViewSet):
     
+    
     """
     API endpoint that allows tournaments to be viewed, created, edited or deleted.
     

@@ -1,25 +1,44 @@
 @baseUrl = http://127.0.0.1:8000/api
+@userId = 3ae4bff9-3f45-4d5e-8e31-3aad2f46a48c
+@playerProfileId = 1
 
 ### ===========================================
 ### 1. OBTENIR MON PROFIL JOUEUR
 ### GET /api/player/profile/
 ### (le backend crée le profil si absent)
 ### ===========================================
-GET {{baseUrl}}/player/profile/
+GET {{baseUrl}}/playerprofiles/
+Accept: application/json
+###
+POST {{baseUrl}}/playerprofiles/
+Content-Type: application/json
+
+{
+    "user": "{{userId}}",
+    "full_name": "Émile Bouchard",
+    "city": "Québec",
+    "favorite_sport": "Hockey",
+    "level": "beginner",
+    "position": "Ailier Gauche"
+}
+ 
+### ===========================================
+### 2. METTRE À JOUR MON PROFIL JOUEUR
+### PATCH /api/player/profile/
+### ===========================================
+PATCH {{baseUrl}}/playerprofiles/{{playerProfileId}}/
+Content-Type: application/json
 Accept: application/json
 
+{
+  "city": "Oran",
+  "favorite_sport": "football",
+  "level": "intermediate",
+  "position": "Attaquant"
+}
 
 ### ===========================================
 ### 2. METTRE À JOUR MON PROFIL JOUEUR
 ### PATCH /api/player/profile/
 ### ===========================================
-PATCH {{baseUrl}}/player/profile/
-Content-Type: application/json
-Accept: application/json
-
-{
-  "city": "Montreal",
-  "favorite_sport": "football",
-  "level": "intermediate",
-  "position": "Attaquant"
-}
+GET  {{baseUrl}}/playerprofiles/{{playerProfileId}}/
