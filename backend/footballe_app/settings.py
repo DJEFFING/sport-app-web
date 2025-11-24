@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
-# Charger les variables d'environnement
+# Load environment variables
 load_dotenv()
 
 # Build paths inside the project
@@ -24,10 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key-change-this')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = os.getenv('BUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -39,15 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework', 
-
     # Nos applications
     'tournaments.apps.TournamentsConfig',
     'joinRequest.apps.JoinrequestConfig',
-    'teams.apps.TeamsConfig',   # <-- ADD THIS
+    'teams.apps.TeamsConfig',
     'users.apps.UsersConfig',
     'playerProfile.apps.PlayerprofileConfig',
     'matchs.apps.MatchsConfig',
-
 ]
 
 MIDDLEWARE = [
@@ -83,60 +81,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'footballe_app.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Database
-# Configuration PostgreSQL avec Neon
-import dj_database_url
-
-# Si DATABASE_URL existe dans .env, l'utiliser, sinon SQLite par défaut
+# Database configuration: use Neon/PostgreSQL if DATABASE_URL is set, else fallback to SQLite
 if os.getenv('DATABASE_URL'):
     DATABASES = {
         'default': dj_database_url.config(
@@ -153,26 +98,26 @@ else:
         }
     }
 
-
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# =============================================================================
-# DJANGO REST FRAMEWORK CONFIGURATION
-# =============================================================================
+# Internationalization
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_TZ = True
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = 'static/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Django REST Framework configuration
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
@@ -184,16 +129,12 @@ REST_FRAMEWORK = {
     ],
 }
 
-# =============================================================================
-# CORS CONFIGURATION
-# =============================================================================
-# Autoriser le frontend React à faire des requêtes
+# CORS configuration
 CORS_ALLOWED_ORIGINS = [
     os.getenv('FRONTEND_URL', 'http://localhost:3000'),
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -202,7 +143,6 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
-
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -215,16 +155,12 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-# =============================================================================
-# CLERK CONFIGURATION
-# =============================================================================
+# Clerk configuration
 CLERK_SECRET_KEY = os.getenv('CLERK_SECRET_KEY')
 CLERK_PUBLISHABLE_KEY = os.getenv('CLERK_PUBLISHABLE_KEY')
 CLERK_JWKS_URL = os.getenv('CLERK_JWKS_URL')
 
-# =============================================================================
-# STRIPE CONFIGURATION
-# =============================================================================
+# Stripe configuration
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
