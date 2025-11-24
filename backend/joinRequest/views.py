@@ -47,19 +47,25 @@ class JoinRequestViewSet(viewsets.ModelViewSet):
           "message": "optionnel"
         }
         """
-        # 1) Choisir un user pour jouer le rôle de player
-        user = request.user
-        if not user or not user.is_authenticated:
-            user = User.objects.first()
-            if not user:
-                return Response(
-                    {"detail": "Aucun utilisateur trouvé pour créer la demande."},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
-
-        # 2) Récupérer les données du body
+        # 1) Récupérer les données du body
         team_id = request.data.get("team")
         message = request.data.get("message", "")
+        user_id = request.data.get("pale")
+        
+        # 2) Choisir un user pour jouer le rôle de player si user_id  n'est pas donner dans le body
+        if not user_id:
+            user = request.user
+            if not user or not user.is_authenticated:
+                user = User.objects.first()
+                if not user:
+                    return Response(
+                        {"detail": "Aucun utilisateur trouvé pour créer la demande."},
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
+        else:
+            user = User.objects.get(id=user_id)
+
+
 
         if not team_id:
             return Response(

@@ -1,7 +1,9 @@
 @baseUrl = http://127.0.0.1:8000/api
 @playerId = 6
-@teamId = 6369e960-d1c3-46c3-b920-2e89fb9b77dc
+@teamId = cb9376dc-c762-427c-b043-ff2a271dc41c
+@userId = a4ac4d34-fd0d-4554-85f8-6d7542510616
 @organizerId = fb9ad348-d532-4849-90c3-a0135fb9ab5c
+@joinRequestId = 3875e8c6-d9e3-47f9-8cd1-0ca4cba83062
 
 
 ### ================================
@@ -19,7 +21,8 @@ POST {{baseUrl}}/join-requests/
 Content-Type: application/json
 
 {
-  "team": "83d7499f-e077-4206-9a82-6d57a0e9bbf1",
+  "user_id":"{{userId}}",
+  "team": "{{teamId}}",
   "message": "Je veux rejoindre l'équipe 🙂"
 }
 
@@ -28,7 +31,7 @@ Content-Type: application/json
 ### 2) Voir MES demandes (joueur)
 ### ================================
 ### Remplace ICI_PLAYER_ID par l'id d'un user (joueur)
-GET {{baseUrl}}/join-requests/my/?player_id=aaf3dcaa-39ce-40d0-9caf-11b6a10ce51f
+GET {{baseUrl}}/join-requests/my/?player_id={{userId}}
 Content-Type: application/json
 
 
@@ -36,7 +39,7 @@ Content-Type: application/json
 ### 3) Voir les demandes reçues (organisateur)
 ### ================================
 ### Remplace ICI_ORGANIZER_ID par l'id d'un user organisateur
-GET {{baseUrl}}/join-requests/received/?organizer_id=fb9ad348-d532-4849-90c3-a0135fb9ab5c
+GET {{baseUrl}}/join-requests/received/?organizer_id={{organizerId}}
 Content-Type: application/json
 
 
@@ -44,7 +47,7 @@ Content-Type: application/json
 ### 4) Accepter une demande
 ### ================================
 ### Remplace ICI_JOINREQUEST_ID par l'id d'une join request
-PATCH {{baseUrl}}/join-requests/daba24e2-e7da-4c21-9490-4f19a2381764/
+PATCH {{baseUrl}}/join-requests/{{joinRequestId}}/
 Content-Type: application/json
 
 {
@@ -55,7 +58,7 @@ Content-Type: application/json
 ### ================================
 ### 5) Refuser une demande
 ### ================================
-PATCH {{baseUrl}}/join-requests/daba24e2-e7da-4c21-9490-4f19a2381764/
+PATCH {{baseUrl}}/join-requests/{{joinRequestId}}/
 Content-Type: application/json
 
 {

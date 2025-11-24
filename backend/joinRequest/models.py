@@ -2,8 +2,8 @@ from django.db import models
 import uuid
 
 # Importez les modèles nécessaires
-from users.models import User
-from teams.models import Team
+# from users.models import User
+# from teams.models import Team
 
 class JoinRequest(models.Model):
     """
@@ -26,7 +26,7 @@ class JoinRequest(models.Model):
     
     # Lien One-to-Many vers User (le joueur qui fait la demande)
     player = models.ForeignKey(
-        User, 
+        'users.User', 
         on_delete=models.CASCADE,
         related_name='join_requests',
         verbose_name="Joueur demandeur"
@@ -34,7 +34,7 @@ class JoinRequest(models.Model):
     
     # Lien One-to-Many vers Team (l'équipe ciblée par la demande)
     team = models.ForeignKey(
-        Team, 
+        'teams.Team', 
         on_delete=models.CASCADE,
         related_name='join_requests',
         verbose_name="Équipe ciblée"

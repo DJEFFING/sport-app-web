@@ -1,10 +1,15 @@
 import { Container } from "@mui/material";
 import { LeftDrawerPlayer } from "../../../components/leftDrawer/LeftDrawerPlayer";
 import AvalibleTeamTable from "../../../components/tables/avalibleTeamTable";
+import { useMemo } from "react";
+import {JoinRequestService} from "../../../services/joinRequest/joinRequestService"
 
 
 // Ce composant affiche la liste des Equipe dont les effectifs ne sont pas encore complete
 export const AvalibleTeam = () => {
+  const joinRequest = useMemo(()=> new JoinRequestService(),[])
+
+  
 
   return (
     <Container>
