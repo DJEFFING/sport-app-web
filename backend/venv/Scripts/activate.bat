@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set "VIRTUAL_ENV=D:\Course-platforme\sport-app-web\backend\venv"
+set "VIRTUAL_ENV=C:\Users\saber\Downloads\sport-app-web-1\foot_app_main_amine\sport-app-web\backend\venv"
 
 if not defined PROMPT set PROMPT=$P$G
 

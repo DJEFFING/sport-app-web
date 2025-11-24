@@ -26,9 +26,12 @@ Content-Type: application/json
 ### 2. METTRE À JOUR MON PROFIL JOUEUR
 ### PATCH /api/player/profile/
 ### ===========================================
-PATCH {{baseUrl}}/playerprofiles/{{playerProfileId}}/
+# PATCH {{baseUrl}}/playerprofiles/{{playerProfileId}}/
+# Content-Type: application/json
+# Accept: application/json
+###
+POST {{baseUrl}}/playerprofiles/
 Content-Type: application/json
-Accept: application/json
 
 {
   "city": "Oran",
@@ -37,8 +40,27 @@ Accept: application/json
   "position": "Attaquant"
 }
 
+{
+    "user": "fb9ad348-d532-4849-90c3-a0135fb9ab5c",
+    "full_name": "Émile Bouchard",
+    "city": "Québec",
+    "favorite_sport": "Hockey",
+    "level": "beginner",
+    "position": "Ailier Gauche"
+}
 ### ===========================================
 ### 2. METTRE À JOUR MON PROFIL JOUEUR
 ### PATCH /api/player/profile/
 ### ===========================================
 GET  {{baseUrl}}/playerprofiles/{{playerProfileId}}/
+
+PATCH {{baseUrl}}/playerprofiles/{{playerProfileId}}/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "city": "Montreal",
+  "favorite_sport": "football",
+  "level": "intermediate",
+  "position": "Attaquant"
+}

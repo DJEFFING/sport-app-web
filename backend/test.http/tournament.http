@@ -4,8 +4,8 @@
 
 ### Variables (Remplacez ces valeurs par vos vraies données)
 @baseUrl = http://127.0.0.1:8000/api
-@organizerId = 3ae4bff9-3f45-4d5e-8e31-3aad2f46a48c
-@tournamentId = 7bf097e7-95b2-478b-be80-01473347cc10
+@organizerId = fb9ad348-d532-4849-90c3-a0135fb9a
+@tournamentId = 7ff98128-e407-43af-993a-58a6a4e7e14b
 
 
 ### ===========================================

@@ -93,12 +93,12 @@ sports_platform/                # Dossier du projet backend
     ├── urls.py
     └── services.py (optionnel)
 ```
-### Comment remplir les IDs  JoinRequest?
+### Comment remplir les ID JoinRequest?
 
-- `teamId` → tu le prends dans la réponse de `GET /api/teams/`
+-  ` teamId` → tu le prends dans la réponse de ` GET /api/teams/ `
 
-- `playerId` → tu le prends soit dans `GET /api/users/`, soit dans le champ "`player`" de la join request créée.
+-  ` playerId ` → tu le prends soit dans ` GET /api/users/ ` , soit dans le champ " ` player ` " de la join request créée.
 
-- `organizerId` → c’est l’id du user qui est organiser du tournoi de l’équipe (champ `organizer` du tournoi si tu le exposes, ou ce que vous avez utilisé en base).
+-  ` organiserId ` → c'est l'id du user qui est organisateur du tournoi de l'équipe (champ ` organisateur ` du tournoi si tu le expose, ou ce que vous avez utilisé en base).
 
-- `joinRequestId` → `id` dans la réponse du `POST /api/join-requests/`
+-  ` joinRequestId ` → ` id ` dans la réponse du ` POST /api/join-requests/ `

@@ -49,7 +49,7 @@ class JoinRequestViewSet(viewsets.ModelViewSet):
         """
         # 1) Récupérer les données du body
         team_id = request.data.get("team")
-        message = request.data.get("message", "")
+        message = request.data.get("message")
         user_id = request.data.get("user_id")
         
         # 2) Choisir un user pour jouer le rôle de player si user_id  n'est pas donner dans le body
