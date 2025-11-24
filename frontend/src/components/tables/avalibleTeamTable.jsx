@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,10 +7,16 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button"; // N'oubliez pas cet import !
+import { useEffect } from "react";
+import { getAllAvalableTeams } from "../../services/team/teamService";
 
 // 1. On définit les données qui correspondent à vos colonnes
-function createData(nom, tournoiParent, capaciteMax, nbrInscrits) {
-  return { nom, tournoiParent, capaciteMax, nbrInscrits };
+// function createData(nom, tournoiParent, capaciteMax, nbrInscrits) {
+//   return { nom, tournoiParent, capaciteMax, nbrInscrits };
+//}
+
+function createData(name, tournament_name, max_capacity, current_capacity) {
+  return { name, tournament_name, max_capacity, current_capacity };
 }
 
 // 2. On crée des exemples de données réalistes
@@ -22,6 +28,17 @@ const rows = [
 ];
 
 export default function AvalibleTeamTable() {
+  const [teams, setTeams] = useState(rows);
+
+  useEffect(()=>{
+    const avalibleTeams = async ()=>{
+    const response = await getAllAvalableTeams();
+     console.log("la liste des Equipe disponible", response)
+     setTeams(response)
+   };
+   avalibleTeams();
+ },[])
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 950 }} aria-label="simple table">
@@ -38,24 +55,24 @@ export default function AvalibleTeamTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {teams.map((row) => (
             <TableRow
-              key={row.nom}
+              key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               {/* 1. Nom */}
               <TableCell component="th" scope="row">
-                {row.nom}
+                {row.name}
               </TableCell>
               
               {/* 2. Tournoi Parent */}
-              <TableCell>{row.tournoiParent}</TableCell>
+              <TableCell>{row.tournament_name}</TableCell>
               
               {/* 3. Capacité Max (aligné à droite comme le header) */}
-              <TableCell align="right">{row.capaciteMax}</TableCell>
+              <TableCell align="right">{row.max_capacity}</TableCell>
               
               {/* 4. Nbr Joueurs (aligné à droite) */}
-              <TableCell align="right">{row.nbrInscrits}</TableCell>
+              <TableCell align="right">{row.current_capacity}</TableCell>
 
               {/* 5. Bouton Adhésion (aligné au centre) */}
               <TableCell align="center">

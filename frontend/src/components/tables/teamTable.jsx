@@ -5,9 +5,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useEffect, useState } from "react";
+import { getAllTeams } from "../../services/team/teamService";
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+
+function createData(name, tournament_name, max_capacity, current_capacity) {
+  return { name, tournament_name, max_capacity, current_capacity };
 }
 
 const rows = [
@@ -19,6 +22,18 @@ const rows = [
 ];
 
 export default function TeamTable() {
+  const [teams, setTeams] = useState(rows);
+
+    useEffect(() =>{
+      const getTeams = async()=>{
+        const response = await getAllTeams();
+        // console.log("La liste des Equipes du backend : ",response)
+        setTeams(response.results)
+        
+      };
+      getTeams();
+    },[])
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -34,7 +49,7 @@ export default function TeamTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {teams.map((row) => (
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -42,9 +57,9 @@ export default function TeamTable() {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
+              <TableCell align="right">{row.tournament_name}</TableCell>
+              <TableCell align="right">{row.max_capacity}</TableCell>
+              <TableCell align="right">{row.current_capacity}</TableCell>
               <TableCell align="right">
                 <button className="btn btn-warning">
                   <span className="material-symbols-outlined">edit</span>

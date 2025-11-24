@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+import random
 
 # Importez le modèle Team
 from teams.models import Team 
@@ -44,6 +45,17 @@ class Match(models.Model):
     
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def status(self):
+        #Juste à titre de teste
+        list_status = ['Terminé', 'En cours', 'À venir']
+    
+        if(self.score_a==None or self.score_b==None):
+           return list_status[2]    
+        
+        satus = random.choices(list_status)
+        return satus[0]
+
     class Meta:
         db_table = 'matches'
         verbose_name = "Match"
@@ -56,6 +68,8 @@ class Match(models.Model):
             )
         ]
         ordering = ['date'] # Tri par défaut : du plus ancien au plus récent
+
+
 
     def __str__(self):
         """Représentation en chaîne de caractères de l'objet."""

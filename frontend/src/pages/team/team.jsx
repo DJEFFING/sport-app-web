@@ -5,6 +5,8 @@ import { LeftDrawerOrganizer } from "../../components/leftDrawer/LeftDrawerOrgan
 // import { LeftDrawerOrganizer } from "../../components/LeftDrawer/LeftDrawerOrganizer";
 
 export const Team = () => {
+
+
   return (
     <Container>
       <div className="row mt-5 mb-3">
