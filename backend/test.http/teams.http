@@ -1,0 +1,87 @@
+@baseUrl = http://127.0.0.1:8000/api
+@tournamentId = 7bf097e7-95b2-478b-be80-01473347cc10
+@teamId = a3757c56-d9f8-4804-a287-d0bf7843fb07
+
+### ===========================================
+### 1. LISTE DES ÉQUIPES (si list activé)
+### ===========================================
+GET {{baseUrl}}/teams/
+Accept: application/json
+
+
+### ===========================================
+### 2. CRÉATION D’UNE ÉQUIPE (POST /api/teams/)
+### Organizer connecté requis (normalement)
+### ===========================================
+POST {{baseUrl}}/teams/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "FC Montréal Legends",
+  "tournament": "{{tournamentId}}",
+  "max_capacity": 15
+
+}
+
+###
+POST {{baseUrl}}/teams/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Inter Miami FC",
+  "tournament": "{{tournamentId}}",
+  "max_capacity": 15
+
+}
+
+
+### ===========================================
+### 3. DÉTAIL D’UNE ÉQUIPE (GET /api/teams/{id}/)
+### ===========================================
+GET {{baseUrl}}/teams/{{teamId}}/
+Accept: application/json
+
+
+### ===========================================
+### 4. LISTE DES ÉQUIPES DISPONIBLES (GET /api/teams/available/)
+### Sans filtre
+### ===========================================
+GET {{baseUrl}}/teams/available/
+Accept: application/json
+
+
+### ===========================================
+### 5. ÉQUIPES DISPONIBLES FILTRÉES PAR VILLE
+### ?city=Montreal
+### ===========================================
+GET {{baseUrl}}/teams/available/?city=Montreal
+Accept: application/json
+
+
+### ===========================================
+### 6. ÉQUIPES DISPONIBLES FILTRÉES PAR SPORT
+### ?sport=football
+### (ton viewset utilise tournament__sport)
+### ===========================================
+GET {{baseUrl}}/teams/available/?sport=football
+Accept: application/json
+
+
+### ===========================================
+### 7. ÉQUIPES DISPONIBLES PAR VILLE + SPORT
+### ?city=Montreal&sport=football
+### ===========================================
+GET {{baseUrl}}/teams/available/?city=Montreal&sport=football
+Accept: application/json
+
+
+###
+PATCH {{baseUrl}}/teams/{{teamId}}/
+Content-Type: application/json
+
+{
+  "current_capacity": 15
+}
+ 

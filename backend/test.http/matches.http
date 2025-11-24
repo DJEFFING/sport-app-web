@@ -1,0 +1,64 @@
+@baseUrl = http://127.0.0.1:8000/api
+@teamAId = a3757c56-d9f8-4804-a287-d0bf7843fb07
+@teamBId = cb9376dc-c762-427c-b043-ff2a271dc41c
+@matchId = UUID_MATCH_ICI
+
+
+### ===========================================
+### Obtenir la liste des matchs
+### Organizer du tournoi des 2 équipes requis
+### ===========================================
+GET {{baseUrl}}/matches/
+Accept: application/json
+
+### ===========================================
+### 1. CRÉER UN MATCH (POST /api/matches/)
+### Organizer du tournoi des 2 équipes requis
+### ===========================================
+
+POST {{baseUrl}}/matches/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "team_a": "{{teamAId}}",
+  "team_b": "{{teamBId}}",
+  "date": "2025-12-10T19:30:00Z",
+  "location": "Stade Saputo"
+}
+
+
+### ===========================================
+### 2. LISTER MES MATCHS (GET /api/matches/my/)
+### (organisateur OU joueur membre d’une des équipes)
+### ===========================================
+GET {{baseUrl}}/matches/my/
+Accept: application/json
+
+
+### ===========================================
+### 3. MATCHS À VENIR (GET /api/matches/my/?status=upcoming)
+### ===========================================
+GET {{baseUrl}}/matches/my/?status=upcoming
+Accept: application/json
+
+
+### ===========================================
+### 4. MATCHS PASSÉS (GET /api/matches/my/?status=past)
+### ===========================================
+GET {{baseUrl}}/matches/my/?status=past
+Accept: application/json
+
+
+### ===========================================
+### 5. METTRE À JOUR LES SCORES (PATCH /api/matches/{id}/)
+### Seuls score_a et score_b sont autorisés
+### ===========================================
+PATCH {{baseUrl}}/matches/{{matchId}}/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "score_a": 3,
+  "score_b": 1
+}

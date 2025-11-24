@@ -16,17 +16,19 @@ import { Game } from './pages/games/games';
 import { AdhesionValidation } from './pages/adhesion/adhesionValidation/adhesionValidation';
 import OrganizerDashboard from './pages/organizer/organizerDashboard/organizerDashboard';
 import { AvalibleTeam } from './pages/team/avilble-team/avalibleTeam';
+import { getTournamentList } from './services/tournament/tounamentService';
 
 function App() {
   // const [count, setCount] = useState(0)
 
+  // List des Tounois
   return (
     <BrowserRouter>
      <AppBarLayout/>
      <Routes>
      <Route path='/' element={<Accueil/>}/>
      <Route path='/organisateur' element={<Organisateur/>}/>
-     <Route path='/tournaments' element={<Tournament/>}/>
+     <Route path='/tournaments' element={<Tournament getTournamentList={getTournamentList()}/>}/>
      <Route path='/teams' element={<Team/>}/>
      <Route path='/avalibleTeams' element={<AvalibleTeam/>}/>
      <Route path='/games' element={<Game/>}/>

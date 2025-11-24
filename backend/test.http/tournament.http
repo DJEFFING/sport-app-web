@@ -4,8 +4,8 @@
 
 ### Variables (Remplacez ces valeurs par vos vraies données)
 @baseUrl = http://127.0.0.1:8000/api
-@organizerId = aaf3dcaa-39ce-40d0-9caf-11b6a10ce51f
-@tournamentId = 1
+@organizerId = 3ae4bff9-3f45-4d5e-8e31-3aad2f46a48c
+@tournamentId = 7bf097e7-95b2-478b-be80-01473347cc10
 
 
 ### ===========================================
@@ -24,9 +24,10 @@ POST {{baseUrl}}/tournaments/
 Content-Type: application/json
 
 {
-    "name": "Coupe d'Automne des Lumières",
-    "location": "Stade Olympique de Montréal",
-    "start_date": "2025-12-01",
+    "name": "Tournoi de la Capitale",
+    "sport": "Soccer",
+    "city": "Ottawa",
+    "start_date": "2026-06-01",
     "end_date": "2025-12-07",
     "organizer": "{{organizerId}}"
 }
@@ -38,9 +39,10 @@ POST {{baseUrl}}/tournaments/
 Content-Type: application/json
 
 {
-    "name": "Tournoi d'Hiver du Québec",
-    "location": "Centre Sportif de Laval",
-    "start_date": "2026-01-15",
+    "name": "Tournoi de la Capitale",
+    "sport": "Soccer",
+    "city": "Ottawa",
+    "start_date": "2026-06-01",
     "end_date": "2026-01-22",
     "organizer": "{{organizerId}}"
 }
@@ -52,9 +54,10 @@ POST {{baseUrl}}/tournaments/
 Content-Type: application/json
 
 {
-    "name": "Championnat de Printemps",
-    "location": "Stade Saputo",
-    "start_date": "2026-04-10",
+    "name": "Ligue d'Été de Montréal",
+    "sport": "Basketball",
+    "city": "Montréal",
+    "start_date": "2026-07-20",
     "end_date": "2026-04-17",
     "organizer": "{{organizerId}}"
 }
@@ -67,7 +70,8 @@ Content-Type: application/json
 
 {
     "name": "Tournoi Express Weekend",
-    "location": "Complexe Sportif Claude-Robillard",
+    "city": "Longeuil",
+    "sport": "Volelball",
     "start_date": "2026-02-20",
     "end_date": "2026-02-21",
     "organizer": "{{organizerId}}"
@@ -81,7 +85,8 @@ Content-Type: application/json
 
 {
     "name": "Coupe d'Été International",
-    "location": "Parc Jean-Drapeau",
+    "city": "Longeuil",
+    "sport": "Volelball",
     "start_date": "2026-07-01",
     "end_date": "2026-07-15",
     "organizer": "{{organizerId}}"
@@ -95,250 +100,52 @@ Content-Type: application/json
 
 {
     "name": "Tournoi Virtuel Online",
-    "location": "",
+    "sport": "Basketball",
+    "city": "Montréal",
     "start_date": "2026-03-01",
     "end_date": "2026-03-31",
     "organizer": "{{organizerId}}"
 }
 
+### -----------------------------------------------------
+### [2] Lire la liste des tournois (GET List)
+### -----------------------------------------------------
 
-### ===========================================
-### 3. LECTURE (GET) - Récupérer un tournoi spécifique
-### ===========================================
+# Le serveur doit renvoyer 200 OK et la liste des 3 tournois créés
+# (si vous êtes connecté avec le même utilisateur).
+GET {{baseUrl}}/tournaments/ HTTP/1.1
 
-### Récupérer le tournoi avec ID = 1
-GET {{baseUrl}}/tournaments/1/
-Content-Type: application/json
+### -----------------------------------------------------
+### [3] Lire un tournoi spécifique (GET Detail)
+### -----------------------------------------------------
 
-###
+# 1. Exécutez le GET List ci-dessus. 
+# 2. Copiez l'ID (UUID) de l'un des tournois.
+# 3. Collez l'ID dans la variable @tournamentId ci-dessus.
 
-### Récupérer le tournoi avec ID = 2
-GET {{baseUrl}}/tournaments/2/
-Content-Type: application/json
+GET {{baseUrl}}/tournaments/{{tournamentId}}/ HTTP/1.1
 
-###
+### -----------------------------------------------------
+### [4] Mettre à jour un tournoi (PUT/PATCH)
+### -----------------------------------------------------
 
-### Récupérer un tournoi inexistant (devrait retourner 404)
-GET {{baseUrl}}/tournaments/999/
-Content-Type: application/json
+# PUT remplace l'intégralité de l'objet, PATCH met à jour partiellement.
+# Utilisez l'ID copié à l'étape [3].
 
-
-### ===========================================
-### 4. MISE À JOUR COMPLÈTE (PUT)
-### ===========================================
-
-### Modifier complètement le tournoi 1
-PUT {{baseUrl}}/tournaments/1/
-Content-Type: application/json
-
-{
-    "name": "Coupe d'Automne des Lumières - ÉDITION SPÉCIALE",
-    "location": "Stade Olympique de Montréal - Secteur VIP",
-    "start_date": "2025-12-05",
-    "end_date": "2025-12-12",
-    "organizer": "{{organizerId}}"
-}
-
-###
-
-### Modifier le tournoi 2 - Changement de dates
-PUT {{baseUrl}}/tournaments/2/
+PATCH {{baseUrl}}/tournaments/{{tournamentId}}/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Tournoi d'Hiver du Québec - Reporté",
-    "location": "Centre Sportif de Laval",
-    "start_date": "2026-02-01",
-    "end_date": "2026-02-08",
-    "organizer": "{{organizerId}}"
+    "name": "Coupe d'Hiver de Longueuil - ÉDITION FINALE",
+    "city": "Boucherville"
+    // Le sport et la date restent inchangés car c'est un PATCH
 }
 
+### -----------------------------------------------------
+### [5] Supprimer un tournoi (DELETE)
+### -----------------------------------------------------
 
-### ===========================================
-### 5. MISE À JOUR PARTIELLE (PATCH)
-### ===========================================
+# Le serveur doit renvoyer 204 No Content en cas de succès.
+# Utilisez l'ID copié à l'étape [3].
 
-### Modifier seulement le nom du tournoi 1
-PATCH {{baseUrl}}/tournaments/1/
-Content-Type: application/json
-
-{
-    "name": "Coupe d'Automne - Nouvelle Édition"
-}
-
-###
-
-### Modifier seulement la location du tournoi 2
-PATCH {{baseUrl}}/tournaments/2/
-Content-Type: application/json
-
-{
-    "location": "Nouveau Stade de Montréal"
-}
-
-###
-
-### Modifier seulement les dates du tournoi 3
-PATCH {{baseUrl}}/tournaments/3/
-Content-Type: application/json
-
-{
-    "start_date": "2026-04-15",
-    "end_date": "2026-04-20"
-}
-
-###
-
-### Modifier plusieurs champs en même temps
-PATCH {{baseUrl}}/tournaments/4/
-Content-Type: application/json
-
-{
-    "name": "Tournoi Express Weekend - Édition 2",
-    "location": "Complexe Sportif Maisonneuve"
-}
-
-
-### ===========================================
-### 6. SUPPRESSION (DELETE)
-### ===========================================
-
-### Supprimer le tournoi 6 (le tournoi virtuel)
-DELETE {{baseUrl}}/tournaments/6/
-Content-Type: application/json
-
-###
-
-### Supprimer le tournoi 5
-DELETE {{baseUrl}}/tournaments/5/
-Content-Type: application/json
-
-###
-
-### Essayer de supprimer un tournoi déjà supprimé (devrait retourner 404)
-DELETE {{baseUrl}}/tournaments/5/
-Content-Type: application/json
-
-###
-
-### Essayer de supprimer un tournoi inexistant (devrait retourner 404)
-DELETE {{baseUrl}}/tournaments/999/
-Content-Type: application/json
-
-
-### ===========================================
-### 7. TESTS DE VALIDATION (Erreurs attendues)
-### ===========================================
-
-### Créer un tournoi sans nom (devrait échouer)
-POST {{baseUrl}}/tournaments/
-Content-Type: application/json
-
-{
-    "location": "Test Location",
-    "start_date": "2026-01-01",
-    "end_date": "2026-01-10",
-    "organizer": "{{organizerId}}"
-}
-
-###
-
-### Créer un tournoi avec date de fin avant date de début (devrait échouer si validation)
-POST {{baseUrl}}/tournaments/
-Content-Type: application/json
-
-{
-    "name": "Tournoi Invalide",
-    "location": "Test Location",
-    "start_date": "2026-12-31",
-    "end_date": "2026-01-01",
-    "organizer": "{{organizerId}}"
-}
-
-###
-
-### Créer un tournoi sans organisateur (devrait échouer)
-POST {{baseUrl}}/tournaments/
-Content-Type: application/json
-
-{
-    "name": "Tournoi Sans Organisateur",
-    "location": "Test Location",
-    "start_date": "2026-01-01",
-    "end_date": "2026-01-10"
-}
-
-###
-
-### Créer un tournoi avec un UUID organisateur invalide (devrait échouer)
-POST {{baseUrl}}/tournaments/
-Content-Type: application/json
-
-{
-    "name": "Tournoi UUID Invalide",
-    "location": "Test Location",
-    "start_date": "2026-01-01",
-    "end_date": "2026-01-10",
-    "organizer": "invalid-uuid-format"
-}
-
-###
-
-### Créer un tournoi avec un organisateur inexistant (devrait échouer)
-POST {{baseUrl}}/tournaments/
-Content-Type: application/json
-
-{
-    "name": "Tournoi Organisateur Inexistant",
-    "location": "Test Location",
-    "start_date": "2026-01-01",
-    "end_date": "2026-01-10",
-    "organizer": "00000000-0000-0000-0000-000000000000"
-}
-
-
-### ===========================================
-### 8. TESTS DE FILTRAGE (si implémenté)
-### ===========================================
-
-### Filtrer les tournois par nom (nécessite DjangoFilterBackend)
-GET {{baseUrl}}/tournaments/?name=Coupe
-Content-Type: application/json
-
-###
-
-### Filtrer les tournois par date de début
-GET {{baseUrl}}/tournaments/?start_date=2026-01-01
-Content-Type: application/json
-
-###
-
-### Rechercher des tournois (nécessite SearchFilter)
-GET {{baseUrl}}/tournaments/?search=Montréal
-Content-Type: application/json
-
-
-### ===========================================
-### 9. TESTS DE PAGINATION (si implémentée)
-### ===========================================
-
-### Première page
-GET {{baseUrl}}/tournaments/?page=1
-Content-Type: application/json
-
-###
-
-### Deuxième page
-GET {{baseUrl}}/tournaments/?page=2
-Content-Type: application/json
-
-###
-
-### Limiter le nombre de résultats
-GET {{baseUrl}}/tournaments/?limit=2
-Content-Type: application/json
-
-
-### ===========================================
-### FIN DES TESTS
-### ===========================================
+DELETE {{baseUrl}}/tournaments/{{tournamentId}}/ HTTP/1.1
